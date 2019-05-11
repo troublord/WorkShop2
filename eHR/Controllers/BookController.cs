@@ -50,7 +50,7 @@ namespace eHR.Controllers
             ViewBag.length = 0;
             for (int i = 0; i < books.Count; i++)
             {
-                if (book.BOOK_NAME != null)
+                if (book.BOOK_NAME != null)///如果有填書名
                 {
                     if (books[i].BOOK_NAME.Contains(book.BOOK_NAME))///如果三個資料內contain傳進來的bookname
                     {
@@ -59,14 +59,34 @@ namespace eHR.Controllers
                         continue;
                     }
                 }
-                if (book.BOOK_TYPE != null)
+                if (book.BOOK_TYPE != null)///如果有填種類
                 {
-                    if (books[i].BOOK_TYPE.Equals(book.BOOK_TYPE))
+                    if (books[i].BOOK_TYPE.Equals(book.BOOK_TYPE))///如果三個資料有跟表單一樣的種類
                     {
                         CatchBook.Add(books[i]);
                         ViewBag.length = ViewBag.length + 1;
+                        continue;
                     }
                 }
+                if (book.BOOK_KEEPER != null)
+                {
+                    if (books[i].BOOK_KEEPER.Equals(book.BOOK_KEEPER))///如果三個資料有跟表單一樣的借書人
+                    {
+                        CatchBook.Add(books[i]);
+                        ViewBag.length = ViewBag.length + 1;
+                        continue;
+                    }
+                }
+                if (book.BOOK_STATUS != null)
+                {
+                    if (books[i].BOOK_STATUS.Equals(book.BOOK_STATUS))///如果三個資料有跟表單一樣的借閱狀態
+                    {
+                        CatchBook.Add(books[i]);
+                        ViewBag.length = ViewBag.length + 1;
+                        continue;
+                    }
+                }
+
             }
             ViewBag.List = CatchBook;
             return View();
