@@ -5,6 +5,8 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using System.Collections;
+using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 namespace eHR.Models
 {
@@ -14,16 +16,13 @@ namespace eHR.Models
         /// </summary>
         /// 
         [DisplayName("書id")]
-        [Required]
         public int BOOK_ID { get; set; }
 
         [DisplayName("書名")]
-        [Required]
         public string BOOK_NAME { get; set; }
 
         [DisplayName("圖書類別")]
         public string BOOK_TYPE { get; set; }
-
         [DisplayName("借閱人")]
         public string BOOK_KEEPER { get; set; }
 
@@ -41,6 +40,10 @@ namespace eHR.Models
         [DisplayName("作者")]
         public string BOOK_AUTHOR { get; set; }
 
-    }
+
+    
+    
+}
+
     
 }

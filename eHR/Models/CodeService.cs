@@ -46,7 +46,7 @@ namespace eHR.Models
             {
                 BOOK_ID=3,
                 BOOK_NAME = "test3",
-                BOOK_TYPE = "第三",
+                BOOK_TYPE = "匪諜",
                 BOOK_KEEPER = "手中",
                 BOOK_STATUS = "有借",
                 BOOK_AUTHOR = "敦第",
