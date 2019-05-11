@@ -11,60 +11,49 @@ namespace eHR.Models
     public class CodeService
     {
         /// <summary>
-        /// 取得DB連線字串
-        /// </summary>
-        /// <returns></returns>
-        private string GetDBConnectionString()
-        {
-            return
-                System.Configuration.ConfigurationManager.ConnectionStrings["DBConn"].ConnectionString.ToString();
-        }
-        
-
-        /// <summary>
         /// 取得客戶資料
         /// </summary>
         /// <returns></returns>
-        public List<SelectListItem> GetEmployee(string employeeId)
+        public IList<Book> GetBooks()
         {
-            DataTable dt = new DataTable();
-            string sql = @"Select EmployeeID As CodeId, (FirstName + ' ' + LastName) As CodeName 
-                           FROM HR.Employees
-                           WHERE EmployeeID != @EmployeeId";
-            using (SqlConnection conn = new SqlConnection(this.GetDBConnectionString()))
+            IList<Book> books = new List<Book>()
+        {
+            new Book()
             {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.Add(new SqlParameter("@EmployeeId", employeeId));
-                SqlDataAdapter sqlAdapter = new SqlDataAdapter(cmd);
-
-                sqlAdapter.Fill(dt);
-                conn.Close();
+                BOOK_NAME="test1",
+                BOOK_TYPE="喜劇",
+                BOOK_KEEPER="阿明",
+                BOOK_STATUS="沒借",
+                BOOK_AUTHOR="阿貝",
+                BOOK_BOUGHT_DATE=DateTime.Now,
+                BOOK_PUBLISHER="漁夫出版"
+            },
+            new Book()
+            {
+                BOOK_NAME="test2",
+                BOOK_TYPE="匪諜",
+                BOOK_KEEPER="市長",
+                BOOK_STATUS="沒借",
+                BOOK_AUTHOR="成五",
+                BOOK_BOUGHT_DATE=DateTime.Now,
+                BOOK_PUBLISHER="心障並出版"
             }
-            return this.MapCodeData(dt);
+
+        };
+            books.Add(new Book()
+            {
+                BOOK_NAME = "test3",
+                BOOK_TYPE = "第三",
+                BOOK_KEEPER = "手中",
+                BOOK_STATUS = "有借",
+                BOOK_AUTHOR = "敦第",
+                BOOK_BOUGHT_DATE = DateTime.Now,
+                BOOK_PUBLISHER = "發搭猜出版"
+            });
+            return books;
+            
         }
 
-        /// <summary>
-        /// 取得codeTable的部分資料
-        /// </summary>
-        /// <returns></returns>
-        public List<SelectListItem> GetCodeTable(string type)
-        {
-            DataTable dt = new DataTable();
-            string sql = @"Select Distinct CodeVal As CodeName, CodeId As CodeID 
-                           From dbo.CodeTable 
-                           Where CodeType = @Type";
-            using (SqlConnection conn = new SqlConnection(this.GetDBConnectionString()))
-            {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.Add(new SqlParameter("@Type", type));
-                SqlDataAdapter sqlAdapter = new SqlDataAdapter(cmd);
-                sqlAdapter.Fill(dt);
-                conn.Close();
-            }
-            return this.MapCodeData(dt);
-        }
         /// <summary>
         /// Maping 代碼資料
         /// </summary>

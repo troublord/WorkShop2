@@ -17,7 +17,7 @@ namespace eHR.Controllers
         // GET: Book
         public ActionResult Index()
         {
-            Models.Book result = new Models.Book();
+            Models.CodeService result = new Models.CodeService();
             IList<Book> books =  result.GetBooks();
             books[0].BOOK_NAME = "天亮以後";
             ViewBag.list = books;
