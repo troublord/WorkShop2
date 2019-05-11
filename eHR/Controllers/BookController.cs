@@ -18,27 +18,32 @@ namespace eHR.Controllers
         public ActionResult Index()
         {
             Models.CodeService result = new Models.CodeService();
-            IList<Book> books =  result.GetBooks();
+            IList<Book> books = result.GetBooks();
             books[0].BOOK_NAME = "天亮以後";
             ViewBag.list = books;
+            
+            return View();
+        }
+        [HttpPost()]
+        public ActionResult Index(Models.Book book)
+        {
+            return View();
+        }
+        [HttpGet]
+        public ActionResult Search()
+        {
+            Models.CodeService result = new Models.CodeService();
+            IList<Book> books = result.GetBooks();
+            ViewBag.list = books;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Search(Models.Book book)
+        {
 
             return View();
         }
-        [HttpGet()]
-        public ActionResult SearchBook()
-        {
-            Models.Book result = new Models.Book();
-
-            return View(result);
-        }
-        [HttpPost()]
-        public ActionResult SearchBook(Models.Book book)
-        {
-            
-            ViewBag.Label = book.BOOK_NAME;
-
-            return View(book);
-        }
+        
 
 
     }

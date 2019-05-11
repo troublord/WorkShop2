@@ -11,7 +11,7 @@ namespace eHR.Models
     public class CodeService
     {
         /// <summary>
-        /// 取得客戶資料
+        /// 設本資料
         /// </summary>
         /// <returns></returns>
         public IList<Book> GetBooks()
@@ -40,7 +40,7 @@ namespace eHR.Models
             }
 
         };
-            books.Add(new Book()
+            books.Add(new Book()  ///測試是否可加入
             {
                 BOOK_NAME = "test3",
                 BOOK_TYPE = "第三",
@@ -53,6 +53,8 @@ namespace eHR.Models
             return books;
             
         }
+        
+
 
         /// <summary>
         /// Maping 代碼資料
