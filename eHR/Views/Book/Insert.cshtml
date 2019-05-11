@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewBag.Title = "Insert";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Insert</h2>
+@model eHR.Models.Book
+
+
+@using (Html.BeginForm("Insert", "Book", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.BOOK_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.EditorFor(model => model.BOOK_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BOOK_NAME, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.BOOK_AUTHOR, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.EditorFor(model => model.BOOK_AUTHOR, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BOOK_AUTHOR, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.BOOK_PUBLISHER, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.EditorFor(model => model.BOOK_PUBLISHER, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BOOK_PUBLISHER, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.BOOK_NOTE, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.TextArea("BOOK_NOTE", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BOOK_NOTE, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.BOOK_BOUGHT_DATE, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.EditorFor(model => model.BOOK_BOUGHT_DATE, new { htmlAttributes = new { @class = "form-control", Type = "date" } })
+                @Html.ValidationMessageFor(model => model.BOOK_BOUGHT_DATE, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @{
+            List<SelectListItem> listItems = new List<SelectListItem>();
+            listItems.Add(new SelectListItem
+            {
+                Text = "匪諜",
+                Value = "匪諜"
+            });
+            listItems.Add(new SelectListItem
+            {
+                Text = "喜劇",
+                Value = "喜劇",
+            });
+        }
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BOOK_TYPE, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.DropDownListFor(model => model.BOOK_TYPE, listItems, "")
+                @Html.ValidationMessageFor(model => model.BOOK_TYPE, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+
+            <div class="col-md-offset-4 col-md-4">
+                <input type="submit" value="存檔">
+            </div>
+            <div class="col-md-offset-4 col-md-4">
+                <input type="reset" value="清除">
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+<div class="container">
+    <table id="grid">
+        <tr>
+            <td>圖書類別</td>
+            <td>書名</td>
+            <td>購書日期</td>
+            <td>借閱狀態</td>
+            <td>借閱人</td>
+            <td></td>
+        </tr>
+        @for (int i = 0; i < @ViewBag.length; i++)
+        {
+            <tr>
+                <td>@ViewBag.List[i].BOOK_TYPE</td>
+                <td>@ViewBag.List[i].BOOK_NAME</td>
+                <td>@ViewBag.List[i].BOOK_BOUGHT_DATE</td>
+                <td>@ViewBag.List[i].BOOK_STATUS</td>
+                <td>@ViewBag.List[i].BOOK_KEEPER</td>
+                <td>
+                    <a href="@Url.Action("Update","Book")">編輯</a>
+                    <a href="@Url.Action("Delete","Book")">刪除</a>
+                </td>
+            </tr>
+        }
+    </table>
+
+
+
+
+
+</div>

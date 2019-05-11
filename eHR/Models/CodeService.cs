@@ -10,41 +10,39 @@ namespace eHR.Models
 {
     public class CodeService
     {
+        IList<Book> books = new List<Book>();
         /// <summary>
         /// 設本資料
         /// </summary>
         /// <returns></returns>
         public IList<Book> GetBooks()
         {
-            IList<Book> books = new List<Book>()
-        {
-            new Book()
+            
+            books.Add(new Book()  
             {
-                BOOK_ID=1,
-                BOOK_NAME="test1",
-                BOOK_TYPE="喜劇",
-                BOOK_KEEPER="阿明",
-                BOOK_STATUS="沒借",
-                BOOK_AUTHOR="阿貝",
-                BOOK_BOUGHT_DATE=DateTime.Now.Date,
-                BOOK_PUBLISHER="漁夫出版"
-            },
-            new Book()
-            {
-                BOOK_ID=2,
-                BOOK_NAME="test2",
-                BOOK_TYPE="匪諜",
-                BOOK_KEEPER="市長",
-                BOOK_STATUS="沒借",
-                BOOK_AUTHOR="成五",
-                BOOK_BOUGHT_DATE=DateTime.Now.Date,
-                BOOK_PUBLISHER="心障並出版"
-            }
 
-        };
+                BOOK_NAME = "1不做",
+                BOOK_TYPE = "喜劇",
+                BOOK_KEEPER = "市長",
+                BOOK_STATUS = "沒借",
+                BOOK_AUTHOR = "手中",
+                BOOK_BOUGHT_DATE = DateTime.Now.Date,
+                BOOK_PUBLISHER = "否尬sake出版"
+            });
+            books.Add(new Book() 
+            {
+
+                BOOK_NAME = "二不休",
+                BOOK_TYPE = "匪諜",
+                BOOK_KEEPER = "場勘",
+                BOOK_STATUS = "有借",
+                BOOK_AUTHOR = "老闆",
+                BOOK_BOUGHT_DATE = DateTime.Now.Date,
+                BOOK_PUBLISHER = "賣菜出版"
+            });
             books.Add(new Book()  ///測試是否可加入
             {
-                BOOK_ID=3,
+
                 BOOK_NAME = "test3",
                 BOOK_TYPE = "匪諜",
                 BOOK_KEEPER = "手中",
@@ -56,7 +54,28 @@ namespace eHR.Models
             return books;
             
         }
-       
+        /// <summary>
+        /// 沒有用到  寫到這裡要用到可能要改整個workshop所以先放著
+        /// </summary>
+        /// <param name="book"></param>
+        /// <returns></returns>
+        public IList<Book> InsertBooks(Models.Book book)
+        {
+            GetBooks();
+            books.Add(new Book()  
+            {
+                BOOK_NAME = book.BOOK_NAME,
+                BOOK_TYPE = book.BOOK_TYPE,
+                BOOK_KEEPER = null,
+                BOOK_STATUS = "沒借",
+                BOOK_AUTHOR = book.BOOK_AUTHOR,
+                BOOK_BOUGHT_DATE = book.BOOK_BOUGHT_DATE,
+                BOOK_PUBLISHER = book.BOOK_PUBLISHER
+            });
+            return books;
+        }
+
+
 
 
         /// <summary>

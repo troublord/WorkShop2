@@ -114,13 +114,13 @@
                     <td>@ViewBag.List[i].BOOK_KEEPER</td>
                     <td>
                         <a href="@Url.Action("Update","Book")">編輯</a>
-                        <a href="@Url.Action("Delete","Book")">刪除</a>
+                        <a href="@Url.Action("Delete","Book",@ViewBag.List[i].BOOK_NAME)">刪除</a>
                     </td>
                 </tr>
             }
         </table>
 
-        
+        @ViewBag.see
            
         
 

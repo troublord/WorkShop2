@@ -20,9 +20,6 @@ namespace eHR.Controllers
         {
             Models.CodeService result = new Models.CodeService();
             IList<Book> books = result.GetBooks();
-            books[0].BOOK_NAME = "天亮以後";
-            ViewBag.list = books;
-
             return View();
         }
         [HttpPost()]
@@ -37,6 +34,7 @@ namespace eHR.Controllers
             IList<Book> books = result.GetBooks();
             ViewBag.List = books;
             ViewBag.length = books.Count;
+            ViewBag.see = books[0].BOOK_NAME;
 
 
             return View();
@@ -91,8 +89,50 @@ namespace eHR.Controllers
             ViewBag.List = CatchBook;
             return View();
         }
+        [HttpGet]
+        public ActionResult Insert()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Insert(Models.Book book)
+        {
+            Models.CodeService result = new Models.CodeService();
+            IList<Book> books = result.GetBooks();
+            books.Add(new Book()
+            {
+                BOOK_NAME = book.BOOK_NAME,
+                BOOK_TYPE = book.BOOK_TYPE,
+                BOOK_KEEPER = null,
+                BOOK_STATUS = "沒借",
+                BOOK_AUTHOR = book.BOOK_AUTHOR,
+                BOOK_BOUGHT_DATE = book.BOOK_BOUGHT_DATE,
+                BOOK_PUBLISHER = book.BOOK_PUBLISHER
+            });
+            
+            ViewBag.List = books;
+            ViewBag.length = books.Count;
+            return View("Search");
+        }
         
+        public ActionResult Delete(String BookName)
+        {
+            Models.CodeService result = new Models.CodeService();
+            IList<Book> books = result.GetBooks();
 
+            for (int i = 0; i < books.Count; i++)
+            {
+                if (books[i].BOOK_NAME.Equals(BookName))
+                {
+                    books.Remove(books[i]);  ///刪除失敗
+                }
+            }
+
+            ViewBag.List = books;
+            ViewBag.length = books.Count;
+
+            return View("Search");
+        }
 
     }
 }

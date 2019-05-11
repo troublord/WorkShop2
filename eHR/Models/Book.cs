@@ -15,9 +15,6 @@ namespace eHR.Models
         /// 設定假資料
         /// </summary>
         /// 
-        [DisplayName("書id")]
-        public int BOOK_ID { get; set; }
-
         [DisplayName("書名")]
         public string BOOK_NAME { get; set; }
 
@@ -40,10 +37,10 @@ namespace eHR.Models
         [DisplayName("作者")]
         public string BOOK_AUTHOR { get; set; }
 
+       public IList<Book> books = new List<Book>();
 
-    
-    
-}
+
+    }
 
     
 }
