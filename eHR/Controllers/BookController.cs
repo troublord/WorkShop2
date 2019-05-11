@@ -34,7 +34,10 @@ namespace eHR.Controllers
         {
             Models.CodeService result = new Models.CodeService();
             IList<Book> books = result.GetBooks();
-            ViewBag.list = books;
+            ViewBag.List = books;
+            ViewBag.length = books.Count;
+
+
             return View();
         }
         [HttpPost]

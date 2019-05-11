@@ -12,6 +12,11 @@ namespace eHR.Models
     {   /// <summary>
         /// 設定假資料
         /// </summary>
+        /// 
+        [DisplayName("書id")]
+        [Required]
+        public int BOOK_ID { get; set; }
+
         [DisplayName("書名")]
         [Required]
         public string BOOK_NAME { get; set; }
@@ -37,4 +42,5 @@ namespace eHR.Models
         public string BOOK_AUTHOR { get; set; }
 
     }
+    
 }
