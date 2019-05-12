@@ -161,6 +161,7 @@
     <Content Include="Views\Book\Index.cshtml" />
     <Content Include="Views\Book\Search.cshtml" />
     <Content Include="Views\Book\Insert.cshtml" />
+    <Content Include="Views\Book\Update.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

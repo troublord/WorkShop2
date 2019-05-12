@@ -99,22 +99,18 @@ namespace eHR.Controllers
         {
             Models.CodeService result = new Models.CodeService();
             IList<Book> books = result.GetBooks();
-            books.Add(new Book()
-            {
-                BOOK_NAME = book.BOOK_NAME,
-                BOOK_TYPE = book.BOOK_TYPE,
-                BOOK_KEEPER = null,
-                BOOK_STATUS = "沒借",
-                BOOK_AUTHOR = book.BOOK_AUTHOR,
-                BOOK_BOUGHT_DATE = book.BOOK_BOUGHT_DATE,
-                BOOK_PUBLISHER = book.BOOK_PUBLISHER
-            });
+            books = result.InsertBooks(book);
+            
             
             ViewBag.List = books;
             ViewBag.length = books.Count;
             return View("Search");
         }
-        
+        /// <summary>
+        /// 每次只能刪一個
+        /// </summary>
+        /// <param name="BookName"></param>
+        /// <returns></returns>
         public ActionResult Delete(String BookName)
         {
             Models.CodeService result = new Models.CodeService();
@@ -124,7 +120,7 @@ namespace eHR.Controllers
             {
                 if (books[i].BOOK_NAME.Equals(BookName))
                 {
-                    books.Remove(books[i]);  ///刪除失敗
+                    books.Remove(books[i]);  
                 }
             }
 
@@ -132,6 +128,44 @@ namespace eHR.Controllers
             ViewBag.length = books.Count;
 
             return View("Search");
+        }
+        [HttpGet]
+        public ActionResult Update(String BookName)
+        {
+            Models.CodeService result = new Models.CodeService();
+            IList<Book> books = result.GetBooks();
+            for (int i = 0; i < books.Count; i++)
+            {
+                if (books[i].BOOK_NAME.Equals(BookName))
+                {
+                    ViewBag.BookName = books[i].BOOK_NAME;
+                    ViewBag.Author = books[i].BOOK_AUTHOR;
+                    ViewBag.Publisher = books[i].BOOK_PUBLISHER;
+                    ViewBag.Note = books[i].BOOK_NOTE;
+                    ViewBag.BroughtDate = books[i].BOOK_BOUGHT_DATE;
+                    ViewBag.Type = books[i].BOOK_TYPE;
+                    ViewBag.Status = books[i].BOOK_STATUS;
+                    ViewBag.Keeper = books[i].BOOK_KEEPER;
+                }
+            }
+
+                return View();
+        }
+        [HttpPost]
+        public ActionResult Update(Models.Book book)
+        {
+            Models.CodeService result = new Models.CodeService();
+            IList<Book> books = result.GetBooks();
+            books = result.UpdateBooks(book);
+            for (int i = 0; i < books.Count; i++)
+            {
+                if (books[i].BOOK_NAME.Equals(book.BOOK_NAME))
+                {
+                    ///call update function
+                }
+            }
+
+                return View("");
         }
 
     }

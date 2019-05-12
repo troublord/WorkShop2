@@ -1,0 +1,127 @@
+﻿
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Update</h2>
+
+@model eHR.Models.Book
+
+
+@using (Html.BeginForm("Update", "Book", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.BOOK_NAME, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+
+            @Html.EditorFor(model => model.BOOK_NAME, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.BookName } })
+            @Html.ValidationMessageFor(model => model.BOOK_NAME, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.BOOK_AUTHOR, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+
+            @Html.EditorFor(model => model.BOOK_AUTHOR, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.Author } })
+            @Html.ValidationMessageFor(model => model.BOOK_AUTHOR, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.BOOK_PUBLISHER, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+
+            @Html.EditorFor(model => model.BOOK_PUBLISHER, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.Publisher } })
+            @Html.ValidationMessageFor(model => model.BOOK_PUBLISHER, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.BOOK_NOTE, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+
+            @Html.TextArea("BOOK_NOTE", new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.Note } })
+            @Html.ValidationMessageFor(model => model.BOOK_NOTE, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.BOOK_BOUGHT_DATE, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+
+            @Html.EditorFor(model => model.BOOK_BOUGHT_DATE, new { htmlAttributes = new { @class = "form-control", Type = "date", @Value = ViewBag.BroughtDate } })
+            @Html.ValidationMessageFor(model => model.BOOK_BOUGHT_DATE, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @{
+        List<SelectListItem> listItems = new List<SelectListItem>();
+        listItems.Add(new SelectListItem
+        {
+            Text = "匪諜",
+            Value = "匪諜"
+        });
+        listItems.Add(new SelectListItem
+        {
+            Text = "喜劇",
+            Value = "喜劇",
+        });
+    }
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.BOOK_TYPE, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+
+            @Html.DropDownListFor(model => model.BOOK_TYPE, listItems)
+            @Html.ValidationMessageFor(model => model.BOOK_TYPE, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @{
+        List<SelectListItem> StatusItems = new List<SelectListItem>();
+        StatusItems.Add(new SelectListItem
+        {
+            Text = "有借",
+            Value = "有借"
+        });
+        StatusItems.Add(new SelectListItem
+        {
+            Text = "沒借",
+            Value = "沒借"
+        });
+    }
+    <div class="form-group">
+        @Html.LabelFor(model => model.BOOK_STATUS, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+
+            @Html.DropDownListFor(model => model.BOOK_STATUS, StatusItems, "")
+            @Html.ValidationMessageFor(model => model.BOOK_STATUS, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.BOOK_KEEPER, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+
+            @Html.EditorFor(model => model.BOOK_KEEPER, new { htmlAttributes = new { @class = "form-control",@Value=ViewBag.Keeper } })
+            @Html.ValidationMessageFor(model => model.BOOK_KEEPER, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+
+    <div class="form-group">
+
+        <div class="col-md-offset-4 col-md-4">
+            <input type="submit" value="存檔">
+        </div>
+        <div class="col-md-offset-4 col-md-4">
+            <input type="reset" value="清除">
+        </div>
+    </div>
+</div>
+ }
+

@@ -9,15 +9,19 @@ using System.Web.Mvc;
 namespace eHR.Models
 {
     public class CodeService
-    {
-        IList<Book> books = new List<Book>();
+    {/// <summary>
+    /// 我想把IList放在Book 可是在CodeService拿不到值
+    /// </summary>
+        IList<Book> OusideBook ;
+        
         /// <summary>
         /// 設本資料
         /// </summary>
         /// <returns></returns>
         public IList<Book> GetBooks()
         {
-            
+
+            IList<Book> books = new List<Book>();
             books.Add(new Book()  
             {
 
@@ -52,17 +56,18 @@ namespace eHR.Models
                 BOOK_PUBLISHER = "發搭猜出版"
             });
             return books;
-            
+            OusideBook = ReturnBooks();
         }
-        /// <summary>
-        /// 沒有用到  寫到這裡要用到可能要改整個workshop所以先放著
-        /// </summary>
-        /// <param name="book"></param>
-        /// <returns></returns>
+        public IList<Book> ReturnBooks() ///回傳books
+        {
+            
+            return this.OusideBook;  ///一直都是Null
+        }
+
         public IList<Book> InsertBooks(Models.Book book)
         {
-            GetBooks();
-            books.Add(new Book()  
+            IList < Book > CatchBook= GetBooks();
+            CatchBook.Add(new Book()  
             {
                 BOOK_NAME = book.BOOK_NAME,
                 BOOK_TYPE = book.BOOK_TYPE,
@@ -72,7 +77,25 @@ namespace eHR.Models
                 BOOK_BOUGHT_DATE = book.BOOK_BOUGHT_DATE,
                 BOOK_PUBLISHER = book.BOOK_PUBLISHER
             });
-            return books;
+            OusideBook = CatchBook;
+            return CatchBook;
+        }
+
+        public IList<Book> UpdateBooks(Models.Book book)
+        {
+            IList<Book> CatchBook = GetBooks();
+            CatchBook.Add(new Book()
+            {
+                BOOK_NAME = book.BOOK_NAME,
+                BOOK_TYPE = book.BOOK_TYPE,
+                BOOK_KEEPER = null,
+                BOOK_STATUS = "沒借",
+                BOOK_AUTHOR = book.BOOK_AUTHOR,
+                BOOK_BOUGHT_DATE = book.BOOK_BOUGHT_DATE,
+                BOOK_PUBLISHER = book.BOOK_PUBLISHER
+            });
+            OusideBook = CatchBook;
+            return CatchBook;
         }
 
 

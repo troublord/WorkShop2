@@ -37,7 +37,7 @@ namespace eHR.Models
         [DisplayName("作者")]
         public string BOOK_AUTHOR { get; set; }
 
-       public IList<Book> books = new List<Book>();
+       public IList<Book> books;
 
 
     }

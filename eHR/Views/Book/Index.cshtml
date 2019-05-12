@@ -6,9 +6,36 @@
 
 <h2>Index</h2>
 
-<footer>
+<div class="container">
+    <table id="grid">
+        <tr>
+            <td>圖書類別</td>
+            <td>書名</td>
+            <td>購書日期</td>
+            <td>借閱狀態</td>
+            <td>借閱人</td>
+            <td></td>
+        </tr>
+        @for (int i = 0; i < @ViewBag.length; i++)
+        {
+            <tr>
+                <td>@ViewBag.List[i].BOOK_TYPE</td>
+                <td>@ViewBag.List[i].BOOK_NAME</td>
+                <td>@ViewBag.List[i].BOOK_BOUGHT_DATE</td>
+                <td>@ViewBag.List[i].BOOK_STATUS</td>
+                <td>@ViewBag.List[i].BOOK_KEEPER</td>
+                <td>
+                    <a href="@Url.Action("Update","Book")">編輯</a>
+                    <a href="@Url.Action("Delete","Book",@ViewBag.List[i].BOOK_NAME)">刪除</a>
+                </td>
+            </tr>
+        }
+    </table>
 
-    <a href="@Url.Action("Search","Book")">查詢</a>
-    <a href="@Url.Action("Insert","Book")">新增</a>
 
-</footer>
+    <footer>
+
+        <a href="@Url.Action("Search","Book")">查詢</a>
+        <a href="@Url.Action("Insert","Book")">新增</a>
+
+    </footer>
