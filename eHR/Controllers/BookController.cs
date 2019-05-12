@@ -159,13 +159,14 @@ namespace eHR.Controllers
             books = result.UpdateBooks(book);
             for (int i = 0; i < books.Count; i++)
             {
-                if (books[i].BOOK_NAME.Equals(book.BOOK_NAME))
+                if (books[i].BOOK_NAME.Equals(book.BOOK_NAME))///如果name一樣進來
                 {
-                    ///call update function
+                    books[i] = book; ///把要顯示的Tlist設為剛剛傳進來的book
                 }
             }
-
-                return View("");
+            ViewBag.List = books;
+            ViewBag.length = books.Count;
+            return View("Search");
         }
 
     }
